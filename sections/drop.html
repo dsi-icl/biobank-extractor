@@ -1,0 +1,29 @@
+<template class="task-template">
+    <div id="drop-modal" class="drop modal">
+        <div class="drop-wrapper">
+            <header class="drop-header">
+                <div class="drop-backdrop"></div>
+                <svg class="drop-fob">
+                    <circle cx="55" cy="55" r="50" stroke="#333333" stroke-width="3" fill="#444444" />
+                </svg>
+                <div class="drop-progress">
+                    <span id="drop-file-scan-progress"></span>
+                    <em>%</em>
+                </div>
+                <div id="drop-placeholder" class="drop-placeholder">
+                    <svg class="drop-logo">
+                        <rect x="42" y="35" width="26" height="40" fill="#555555" />
+                        <polygon points="55,90 25,60 85,60" fill="#555555" />
+                    </svg>
+                </div>
+            </header>
+            <main class="drop-sections">
+                <section class="drop-section play-along">
+                    <h2 id="drop-fun-message">Hello, Welcome !</h2>
+                    <p id="drop-start-description">To start working with your UK Biobank data, simply drag and drop your file into this window. We'll take
+                        for of the rest from here and guide you through the process.
+                </section>
+            </main>
+        </div>
+    </div>
+</template>

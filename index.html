@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/nativize.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/drop.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="assets/css/section.css">
+    <link rel="stylesheet" href="assets/css/subsection.css">
+    <link rel="import" href="sections/drop.html">
+    <link rel="import" href="sections/communication/announcements.html">
+    <link rel="import" href="sections/system/file-select.html">
+    <link rel="import" href="sections/system/summary.html">
+    <link rel="import" href="sections/system/extract.html">
+</head>
+
+<body>
+    <nav class="nav js-nav">
+        <header class="nav-header">
+            <h1 class="nav-title">UK BIOBANK
+                <strong>Extractor</strong>
+            </h1>
+        </header>
+        <div class="nav-item u-category-communication">
+            <h5 class="nav-category">
+                <svg class="nav-icon">
+                    <use xlink:href="assets/img/icons.svg#icon-communication"></use>
+                </svg> Communication
+            </h5>
+            <button type="button" id="button-announcements" data-section="announcements" class="nav-button">What's
+                <em>new</em>
+            </button>
+        </div>
+        <div class="nav-item u-category-system">
+            <h5 class="nav-category">
+                <svg class="nav-icon">
+                    <use xlink:href="assets/img/icons.svg#icon-system"></use>
+                </svg> Data Exploration
+            </h5>
+            <button type="button" id="button-file-select" data-section="file-select" class="nav-button">Select a file from
+                <em>your machine</em>
+            </button>
+            <button type="button" id="button-summary" data-section="summary" class="nav-button">Summarize what
+                <em>you've got</em>
+            </button>
+            <button type="button" id="button-extract" data-section="extract" class="nav-button">Select data for
+                <em>extraction</em>
+            </button>
+        </div>
+        <!-- <footer class="nav-footer">
+            <a class="nav-footer-logo" href="https://github.com/fguitton" aria-label="Homepage">
+                <svg class="nav-footer-icon">
+                    <use xlink:href="assets/img/icons.svg#icon-love"></use>
+                </svg>
+                Florian G.
+            </a>
+        </footer> -->
+    </nav>
+    <main class="content js-content"></main>
+    <script>
+        require('./assets/imports')
+        require('./assets/ex-links')
+        require('./assets/nav')
+        require('./assets/subsection-buttons')
+        require('./assets/drop-zone')
+    </script>
+</body>
+
+</html>

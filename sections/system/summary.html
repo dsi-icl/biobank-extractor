@@ -1,0 +1,43 @@
+<template class="task-template">
+    <section id="summary-section" class="section js-section u-category-system">
+        <header class="section-header">
+            <div class="section-wrapper">
+                <h1>
+                    <svg class="section-icon">
+                        <use xlink:href="assets/img/icons.svg#icon-system"></use>
+                    </svg> Here is a summary of your data
+                </h1>
+                <h3>We have collected some statistics abour your data to help you through selecting what you need</h3>
+            </div>
+        </header>
+        <div class="subsection">
+            <div class="subsection-wrapper">
+                <div class="drop-stats">
+                    <p class="half">
+                        <span class="drop-stats-title">Number of traits collected</span>
+                        <br/>
+                        <span class="drop-stats-number" id="drop-file-scan-traits"></span>
+                    </p>
+                    <p class="half">
+                        <span class="drop-stats-title">Number of distinct fields</span>
+                        <br/>
+                        <span class="drop-stats-number" id="drop-file-scan-fields"></span>
+                    </p>
+                    <br/>
+                    <br/>
+                    <p>
+                        <span class="drop-stats-title">Number of visits</span>
+                        <br/>
+                        <span class="drop-stats-number" id="drop-file-scan-instances"></span>
+                    </p>
+                    <br/>
+                    <p>
+                        <span class="drop-stats-title">Number of subjects</span>
+                        <br/>
+                        <span class="drop-stats-number" id="drop-file-scan-participants"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
