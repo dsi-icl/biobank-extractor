@@ -1,7 +1,7 @@
 {
     "name": "biobank-extractor",
     "productName": "UK Biobank Extractor",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Cross-platform GUI for UKBiobank data extraction",
     "private": true,
     "main": "main.js",

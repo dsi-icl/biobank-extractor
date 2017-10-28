@@ -1,19 +1,17 @@
-
-/* Custom Properties */
-
 :root {
-  --color:          hsl(0,0%,80%);
-  --color-subtle:   hsl(0,0%,60%);
-  --color-strong:   hsl(0,0%,30%);
-  --color-link:     hsl(0,0%,22%);
-  --color-border:   hsl(0,0%,18%);
-  --color-bg:       hsl(0,0%,20%);
-  --color-navbg:    hsl(0,0%,10%);
-  --color-accent:   black; /* Fallback */
+    --color: hsl(0, 0%, 80%);
+    --color-subtle: hsl(0, 0%, 60%);
+    --color-strong: hsl(0, 0%, 30%);
+    --color-link: hsl(0, 0%, 22%);
+    --color-border: hsl(0, 0%, 18%);
+    --color-bg: hsl(0, 0%, 20%);
+    --color-navbg: hsl(0, 0%, 10%);
+    --color-accent: black;
 }
 
-
-/* Category Colors */
-
-.u-category-communication { --color-accent: hsl(179, 100%, 40%); }
-.u-category-system        { --color-accent: hsl(357, 100%, 70%); }
+.u-category-communication {
+    --color-accent: hsl(179, 100%, 40%);
+}
+.u-category-system {
+    --color-accent: hsl(357, 100%, 70%);
+}
