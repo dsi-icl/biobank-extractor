@@ -1,0 +1,61 @@
+{
+    "name": "biobank-extractor",
+    "productName": "UK Biobank Extractor",
+    "version": "0.3.0",
+    "description": "Cross-platform GUI for UKBiobank data extraction",
+    "private": true,
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "dev": "electron . --debug",
+        "test": "mocha",
+        "package": "npm-run-all package:*",
+        "package:mac": "electron-packager . biobank-extractor --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity=\"Developer ID Application GitHub\" --extend-info=assets/mac/info.plist",
+        "package:win": "electron-packager . biobank-extractor --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/app.ico",
+        "package:linux": "electron-packager . biobank-extractor --overwrite --platform=linux --arch=x64 --out=out",
+        "package:sign-exe": "signcode './out/biobank-extractor-win32-ia32/biobank-extractor.exe' --cert ~/biobank-extractor.p12 --prompt --name 'UK Biobank Extractor' --url 'https://ukbiobank.dsi.ic.ac.uk'",
+        "package:installer": "node ./script/installer.js",
+        "package:sign-installer": "signcode './out/windows-installer/UKBiobankExtractorSetup.exe' --cert ~/biobank-extractor.p12 --prompt --name 'UK Biobank Extractor' --url 'https://ukbiobank.dsi.ic.ac.uk'",
+        "package:mas": "./script/mas.sh",
+        "windows-store": "node ./script/windows-store.js",
+        "release": "node ./script/release.js",
+        "prepack": "check-for-leaks",
+        "prepush": "check-for-leaks"
+    },
+    "repository": "https://github.com/dsi-icl/biobank-extractor",
+    "keywords": [
+        "UK Biobank",
+        "Extractor"
+    ],
+    "author": {
+        "name": "Florian Guitton",
+        "email": "f.guitton@imperial.ac.uk",
+        "url": "https://guitton.tv"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "chai": "^4.1.2",
+        "chai-as-promised": "^7.1.1",
+        "check-for-leaks": "^1.2.0",
+        "devtron": "^1.4.0",
+        "electron": "~1.7.9",
+        "electron-packager": "^9.1.0",
+        "electron-winstaller": "^2.6.3",
+        "mocha": "^4.0.1",
+        "npm-run-all": "^4.1.1",
+        "request": "^2.83.0",
+        "rimraf": "^2.6.2",
+        "signcode": "^1.0.0",
+        "spectron": "~3.7.2"
+    },
+    "dependencies": {
+        "electron-settings": "^3.1.3",
+        "glob": "^7.1.2",
+        "line-by-line": "^0.1.5"
+    },
+    "standard": {
+        "env": {
+            "mocha": true
+        }
+    }
+}
