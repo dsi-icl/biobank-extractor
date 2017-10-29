@@ -55,7 +55,7 @@ describe('biobank-extractor', function () {
                     }]
                 }
                 document.body.dispatchEvent(event);
-            }).pause(3000)
+            }).pause(500)
         })
 
         app.client.addCommand('dismissDropPage', function () {
@@ -159,9 +159,12 @@ describe('biobank-extractor', function () {
 
     describe('when dropping a file in the window', function () {
         it('it computes and shows the file stats', function () {
-            let finalNumber = ["15", "10", "5", "3", "423 B"];
+            let finalNumber = ["15", "10", "5", "3"];
             return app.client.dropFile()
-                .getText('.drop-stats-number').should.eventually.deep.equal(finalNumber)
+                .getText('.drop-stats-number').then(function (v) {
+                    v.pop()
+                    return v;
+                }).should.eventually.deep.equal(finalNumber)
         }, timeout)
     })
 
