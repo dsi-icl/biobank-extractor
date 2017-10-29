@@ -44,9 +44,11 @@ describe('biobank-extractor', function () {
 
     const setupApp = function (app) {
         app.client.addCommand('dismissDropPage', function () {
-            return this.isVisible('.js-nav').then(function (navVisible) {
-                if (!navVisible) {
-                    return this.click('button[id="get-started"]').pause(500)
+            return this.isVisible('#drop-modal').then(function (dropVisible) {
+                if (dropVisible) {
+                    return this.execute(function () {
+                        document.getElementById('drop-modal').classList.remove('is-shown')
+                    })
                 }
             })
         })
@@ -56,7 +58,7 @@ describe('biobank-extractor', function () {
                 .waitForVisible('#' + section + '-section')
         })
 
-        app.client.addCommand('expandDemos', function () {
+        app.client.addCommand('expandSubsections', function () {
             return this.execute(function () {
                 for (let subsection of document.querySelectorAll('.subsection-wrapper')) {
                     subsection.classList.add('is-open')
@@ -64,7 +66,7 @@ describe('biobank-extractor', function () {
             })
         })
 
-        app.client.addCommand('collapseDemos', function () {
+        app.client.addCommand('collapseSubsections', function () {
             return this.execute(function () {
                 for (let subsection of document.querySelectorAll('.subsection-wrapper')) {
                     subsection.classList.remove('is-open')
@@ -77,7 +79,7 @@ describe('biobank-extractor', function () {
                 ignoreRules: ['AX_COLOR_01', 'AX_TITLE_01']
             }
             return this.selectSection(section)
-                .expandDemos()
+                .expandSubsections()
                 .auditAccessibility(options).then(function (audit) {
                     if (audit.failed) {
                         throw Error(section + ' section failed accessibility audit\n' + audit.message)
@@ -125,7 +127,9 @@ describe('biobank-extractor', function () {
     })
 
     it('opens a window displaying the drop page', function () {
-        return app.client.getWindowCount().should.eventually.equal(1)
+        return app.client.waitUntilWindowLoaded()
+            .browserWindow.focus()
+            .getWindowCount().should.eventually.equal(1)
             .browserWindow.isMinimized().should.eventually.be.false
             .browserWindow.isDevToolsOpened().should.eventually.be.false
             .browserWindow.isVisible().should.eventually.be.true
@@ -134,69 +138,40 @@ describe('biobank-extractor', function () {
             .browserWindow.getBounds().should.eventually.have.property('height').and.be.above(0)
             .browserWindow.getTitle().should.eventually.equal('UK Biobank Extractor')
             .waitForVisible('#drop-modal').should.eventually.be.true
-            .isVisible('.js-nav').should.eventually.be.false
-            .click('button[id="get-started"]').pause(500)
-            .isVisible('#drop-modal').should.eventually.be.false
-            .isVisible('.js-nav').should.eventually.be.true
     })
 
     describe('when clicking on a section from the nav bar', function () {
         it('it shows the selected section in the main area', function () {
             return app.client.dismissDropPage()
-                .selectSection('windows')
-                .isExisting('button.is-selected[data-section="windows"]').should.eventually.be.true
-                .isVisible('#pdf-section').should.eventually.be.false
-                .selectSection('pdf')
-                .isVisible('#windows-section').should.eventually.be.false
-                .isExisting('button.is-selected[data-section="windows"]').should.eventually.be.false
-                .isExisting('button.is-selected[data-section="pdf"]').should.eventually.be.true
+                .selectSection('announcements')
+                .isExisting('button.is-selected[data-section="announcements"]').should.eventually.be.true
+                .isVisible('#summary-section').should.eventually.be.false
+                .selectSection('summary')
+                .isVisible('#announcements-section').should.eventually.be.false
+                .isExisting('button.is-selected[data-section="announcements"]').should.eventually.be.false
+                .isExisting('button.is-selected[data-section="summary"]').should.eventually.be.true
         })
     })
 
     describe('when a subsection title is clicked', function () {
         it('it expands the subsection content', function () {
-            let onlyFirstVisible = Array(30).fill(false)
+            let onlyFirstVisible = Array(2).fill(false)
             onlyFirstVisible[0] = true
 
             return app.client.dismissDropPage()
-                .collapseDemos()
-                .selectSection('windows')
+                .collapseSubsections()
+                .selectSection('announcements')
                 .click('.js-container-target')
                 .waitForVisible('.subsection-box')
                 .isVisible('.subsection-box').should.eventually.deep.equal(onlyFirstVisible)
         })
     })
 
-    describe('when the app is restarted after use', function () {
-        it('it launches at last visted section & subsection', function () {
-            let onlyFirstVisible = Array(30).fill(false)
-            onlyFirstVisible[0] = true
-
-            return app.client.waitForVisible('#windows-section')
-                .then(restartApp)
-                .then(function () {
-                    return app.client.waitForVisible('#windows-section')
-                        .isVisible('#windows-section').should.eventually.be.true
-                        .isVisible('.subsection-box').should.eventually.deep.equal(onlyFirstVisible)
-                })
-        })
-    })
-
     it('does not contain any accessibility warnings or errors', function () {
         return app.client.dismissDropPage()
-            .auditSectionAccessibility('windows')
-            .auditSectionAccessibility('crash-hang')
-            .auditSectionAccessibility('menus')
-            .auditSectionAccessibility('shortcuts')
-            .auditSectionAccessibility('ex-links-file-manager')
-            .auditSectionAccessibility('notifications')
-            .auditSectionAccessibility('dialogs')
-            .auditSectionAccessibility('tray')
             .auditSectionAccessibility('announcements')
             .auditSectionAccessibility('file-select')
             .auditSectionAccessibility('summary')
             .auditSectionAccessibility('extract')
-            .auditSectionAccessibility('pdf')
-            .auditSectionAccessibility('desktop-capturer')
     })
 })

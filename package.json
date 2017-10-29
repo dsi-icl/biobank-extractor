@@ -53,10 +53,5 @@
         "filesize": "^3.5.11",
         "glob": "^7.1.2",
         "line-by-line": "^0.1.5"
-    },
-    "standard": {
-        "env": {
-            "mocha": true
-        }
     }
 }
