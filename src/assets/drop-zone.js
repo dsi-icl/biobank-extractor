@@ -27,6 +27,8 @@ ipc.on('files-scan-progress', function (event, arg) {
     let message = null;
     if (arg.progress === undefined) {
 
+        console.log(arg)
+
         message = `${arg.participants}`;
         document.getElementById('drop-file-scan-participants').innerHTML = message;
         message = `${Math.max(...arg.fields)}`;

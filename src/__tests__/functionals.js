@@ -13,12 +13,14 @@ chai.use(chaiAsPromised)
 const timeout = process.env.CI ? 30000 : 10000
 
 describe('biobank-extractor', function () {
-    this.timeout(timeout)
+
+    if (this.timeout)
+        this.timeout(timeout)
 
     let app
 
     const getUserDataPath = function () {
-        const productName = require('../package').productName
+        const productName = require('../../package').productName
         switch (process.platform) {
             case 'darwin':
                 return path.join(process.env.HOME, 'Library', 'Application Support', productName)
@@ -43,6 +45,19 @@ describe('biobank-extractor', function () {
     }
 
     const setupApp = function (app) {
+
+        app.client.addCommand('dropFile', function () {
+            return this.execute(function () {
+                const event = new CustomEvent('drop', { bubbles: true, cancelable: true });
+                event.dataTransfer = {
+                    files: [{
+                        path: require('path').join(__dirname, '__tests__/assets/data/set.csv')
+                    }]
+                }
+                document.body.dispatchEvent(event);
+            })
+        })
+
         app.client.addCommand('dismissDropPage', function () {
             return this.isVisible('#drop-modal').then(function (dropVisible) {
                 if (dropVisible) {
@@ -95,7 +110,7 @@ describe('biobank-extractor', function () {
         app = new Application({
             path: electron,
             args: [
-                path.join(__dirname, '..')
+                path.join(__dirname, '../..')
             ],
             waitTimeout: timeout
         })
@@ -107,12 +122,14 @@ describe('biobank-extractor', function () {
         return app.restart().then(setupApp)
     }
 
-    before(function () {
+    const beforeHook = typeof before === 'undefined' ? beforeAll : before
+    beforeHook(function () {
         removeStoredPreferences()
         return startApp()
     })
 
-    after(function () {
+    const afterHook = typeof after === 'undefined' ? afterAll : after
+    afterHook(function () {
         if (app && app.isRunning()) {
             return app.stop()
         }
@@ -124,7 +141,7 @@ describe('biobank-extractor', function () {
         }).then(function (result) {
             return result.value
         }).should.eventually.equal(getUserDataPath())
-    })
+    }, timeout)
 
     it('opens a window displaying the drop page', function () {
         return app.client.waitUntilWindowLoaded()
@@ -138,6 +155,14 @@ describe('biobank-extractor', function () {
             .browserWindow.getBounds().should.eventually.have.property('height').and.be.above(0)
             .browserWindow.getTitle().should.eventually.equal('UK Biobank Extractor')
             .waitForVisible('#drop-modal').should.eventually.be.true
+    }, timeout)
+
+    describe('when dropping a file in the window', function () {
+        it('it computes and shows the file stats', function () {
+            let finalNumber = ["15", "10", "5", "3", "423 B"];
+            return app.client.dropFile()
+                .getText('.drop-stats-number').should.eventually.deep.equal(finalNumber)
+        }, timeout)
     })
 
     describe('when clicking on a section from the nav bar', function () {
@@ -151,7 +176,7 @@ describe('biobank-extractor', function () {
                 .isExisting('button.is-selected[data-section="announcements"]').should.eventually.be.false
                 .isExisting('button.is-selected[data-section="summary"]').should.eventually.be.true
         })
-    })
+    }, timeout)
 
     describe('when a subsection title is clicked', function () {
         it('it expands the subsection content', function () {
@@ -165,7 +190,7 @@ describe('biobank-extractor', function () {
                 .waitForVisible('.subsection-box')
                 .isVisible('.subsection-box').should.eventually.deep.equal(onlyFirstVisible)
         })
-    })
+    }, timeout)
 
     it('does not contain any accessibility warnings or errors', function () {
         return app.client.dismissDropPage()
@@ -173,5 +198,5 @@ describe('biobank-extractor', function () {
             .auditSectionAccessibility('file-select')
             .auditSectionAccessibility('summary')
             .auditSectionAccessibility('extract')
-    })
+    }, timeout)
 })
