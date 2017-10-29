@@ -10,7 +10,7 @@
         "dev": "electron . --debug",
         "test": "npm-run-all test:*",
         "test:mocha": "cross-env DEBUG=0 mocha ./src/**/__tests__/*.js",
-        "test:jest": "cross-env DEBUG=0 jest --runInBand --coverage --verbose",
+        "test:jest": "cross-env DEBUG=0 jest --coverage",
         "package": "npm-run-all package:*",
         "package:mac": "electron-packager . biobank-extractor --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity=\"Developer ID Application GitHub\" --extend-info=assets/mac/info.plist",
         "package:win": "electron-packager . biobank-extractor --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/app.ico",
