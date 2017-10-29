@@ -35,6 +35,8 @@ ipc.on('files-scan-progress', function (event, arg) {
         document.getElementById('drop-file-scan-fields').innerHTML = message;
         message = `${Object.keys(arg.traits).length}`;
         document.getElementById('drop-file-scan-traits').innerHTML = message;
+        message = `${arg.filesize[0]}<sup> ${arg.filesize[1]}</sup>`;
+        document.getElementById('drop-file-scan-filesize').innerHTML = message;
         document.getElementById('button-summary').click();
         document.querySelector('#drop-modal').classList.remove('is-shown');
         return;

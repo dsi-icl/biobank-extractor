@@ -1,6 +1,7 @@
 const ipc = require('electron').ipcMain
 const liner = require('line-by-line')
 const fs = require('fs');
+const filesize = require('filesize');
 const dict = require('../assets/data/dictionnary.json');
 
 let lr = null;
@@ -47,6 +48,7 @@ ipc.on('files-received', function (event, arg) {
             traits: result.traits,
             fields: result.fields,
             distinct: result.distinct,
+            filesize: filesize(total, { output: "array" }),
             participants
         })
         delete lr;
@@ -56,7 +58,7 @@ ipc.on('files-received', function (event, arg) {
 
 function processTraits(line) {
 
-    let obj = {};
+    let obj = [];
     let match = null;
     let distinct = 0;
     while (match = model.exec(line)) {

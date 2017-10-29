@@ -23,7 +23,7 @@ function initialize() {
             width: 1080,
             minWidth: 790,
             height: 840,
-            minHeight: 480,
+            minHeight: 500,
             title: app.getName()
         }
 

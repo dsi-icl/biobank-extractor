@@ -98,17 +98,44 @@
     color: hsl(0, 0%, 100%);
 }
 
+.drop-stats p {
+    margin: 0;
+    display: block;
+    padding: 15px;
+}
+
+.drop-stats span {
+    display: block;
+}
+
 .drop-stats-title {
     color: var(--color-subtle);
 }
 
-.drop-stats .half {
-    width: 48%;
-    display: inline-block;
+@media (min-width: 850px) {
+    .drop-stats .half {
+        width: 48%;
+        display: inline-block;
+    }
 }
 
 .drop-stats-number {
     color: var(--color-accent);
     font-size: 5rem;
     line-height: 5rem;
+}
+
+.drop-stats-number sup {
+    font-size: 1.3rem;
+    line-height: 1.3rem;
+}
+
+.small .drop-stats-number {
+    color: var(--color);
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+}
+
+.small .drop-stats-title {
+    font-size: 0.7rem;
 }
