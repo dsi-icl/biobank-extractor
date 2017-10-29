@@ -55,7 +55,7 @@ describe('biobank-extractor', function () {
                     }]
                 }
                 document.body.dispatchEvent(event);
-            })
+            }).pause(3000)
         })
 
         app.client.addCommand('dismissDropPage', function () {
