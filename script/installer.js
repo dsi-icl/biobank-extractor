@@ -24,6 +24,7 @@ function getInstallerConfig() {
         loadingGif: path.join(rootPath, 'assets', 'img', 'loading.gif'),
         noMsi: true,
         outputDirectory: path.join(outPath, 'windows-installer'),
+        name: 'UKBiobankExtractor',
         setupExe: 'UKBiobankExtractorSetup.exe',
         setupIcon: path.join(rootPath, 'assets', 'app-icon', 'win', 'app.ico'),
         skipUpdateIcon: true
@@ -37,4 +38,4 @@ function deleteOutputFolder() {
             error ? reject(error) : resolve()
         })
     })
-} 
+}
