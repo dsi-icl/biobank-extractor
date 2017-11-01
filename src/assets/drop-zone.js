@@ -26,9 +26,6 @@ ipc.on('files-scan-progress', function (event, arg) {
 
     let message = null;
     if (arg.progress === undefined) {
-
-        console.log(arg)
-
         message = `${arg.participants}`;
         document.getElementById('drop-file-scan-participants').innerHTML = message;
         message = `${Math.max(...arg.fields)}`;
@@ -39,6 +36,8 @@ ipc.on('files-scan-progress', function (event, arg) {
         document.getElementById('drop-file-scan-traits').innerHTML = message;
         message = `${arg.filesize[0]}<sup> ${arg.filesize[1]}</sup>`;
         document.getElementById('drop-file-scan-filesize').innerHTML = message;
+        message = `${arg.duration}`;
+        document.getElementById('drop-file-scan-duration').innerHTML = message;
         document.getElementById('button-summary').click();
         document.querySelector('#drop-modal').classList.remove('is-shown');
         return;
@@ -57,7 +56,9 @@ ipc.on('files-scan-progress', function (event, arg) {
     if (arg.progress > 40)
         document.getElementById('drop-fun-message').innerHTML = 'Checking alignment of planets ...';
     if (arg.progress > 60)
-        document.getElementById('drop-fun-message').innerHTML = 'Generating convincing entropy ...';
-    if (arg.progress > 80)
         document.getElementById('drop-fun-message').innerHTML = 'Counting cosmic objects ...';
+    if (arg.progress > 80)
+        document.getElementById('drop-fun-message').innerHTML = 'Generating convincing entropy ...';
+    if (arg.progress > 90)
+        document.getElementById('drop-fun-message').innerHTML = 'Initiating time travel ...';
 })

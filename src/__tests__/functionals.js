@@ -51,7 +51,7 @@ describe('biobank-extractor', function () {
                 const event = new CustomEvent('drop', { bubbles: true, cancelable: true });
                 event.dataTransfer = {
                     files: [{
-                        path: require('path').join(__dirname, '__tests__/assets/data/set.csv')
+                        path: require('path').join(__dirname, '../sink/tuples/set.csv')
                     }]
                 }
                 document.body.dispatchEvent(event);

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/css/nativize.css">
     <link rel="stylesheet" href="assets/css/global.css">
     <link rel="stylesheet" href="assets/css/drop.css">
+    <link rel="stylesheet" href="assets/css/extract.css">
     <link rel="stylesheet" href="assets/css/nav.css">
     <link rel="stylesheet" href="assets/css/section.css">
     <link rel="stylesheet" href="assets/css/subsection.css">
@@ -40,32 +41,51 @@
                     <use xlink:href="assets/img/icons.svg#icon-system"></use>
                 </svg> Data Exploration
             </h5>
-            <button type="button" id="button-file-select" data-section="file-select" class="nav-button">Select a file from
-                <em>your machine</em>
+            <button type="button" id="button-file-select" data-section="file-select" class="nav-button">Select a file
+                <em>from your machine</em>
             </button>
-            <button type="button" id="button-summary" data-section="summary" class="nav-button">Summarize what
-                <em>you've got</em>
+            <button type="button" id="button-summary" data-section="summary" class="nav-button">
+                <em>Summarize</em> what you've got
             </button>
-            <button type="button" id="button-extract" data-section="extract" class="nav-button">Select data for
+            <button type="button" id="button-extract" data-section="extract" class="nav-button">Select fields for
                 <em>extraction</em>
             </button>
         </div>
-        <!-- <footer class="nav-footer">
+        <!--
+            <footer class="nav-footer">
             <a class="nav-footer-logo" href="https://github.com/fguitton" aria-label="Homepage">
                 <svg class="nav-footer-icon">
                     <use xlink:href="assets/img/icons.svg#icon-love"></use>
                 </svg>
                 Florian G.
             </a>
-        </footer> -->
+            </footer>
+        -->
     </nav>
     <main class="content js-content"></main>
     <script>
         require('./assets/imports')
+        require('./assets/drop-zone')
+        require('./assets/field-search')
         require('./assets/ex-links')
         require('./assets/nav')
         require('./assets/subsection-buttons')
-        require('./assets/drop-zone')
+
+        const event = new CustomEvent('drop', { bubbles: true, cancelable: true });
+        event.dataTransfer = {
+            files: [{
+                path: require('path').join(__dirname, '../sink/tuples/set.csv')
+            }]
+        }
+        document.body.dispatchEvent(event);
+
+        setTimeout(function () {
+            const event = new CustomEvent('input', { bubbles: true, cancelable: true });
+            document.querySelector('button[data-section="extract"]').click();
+            document.querySelector('#extract-search-input').value = "sex";
+            document.querySelector('#extract-search-input').dispatchEvent(event);
+        }, 1000)
+
     </script>
 </body>
 

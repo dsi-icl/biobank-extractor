@@ -21,14 +21,14 @@ function initialize() {
 
         var windowOptions = {
             width: 1080,
-            minWidth: 790,
+            minWidth: 850,
             height: 840,
             minHeight: 500,
             title: app.getName()
         }
 
         if (process.platform === 'linux') {
-            windowOptions.icon = path.join(__dirname, '/assets/app-icon/png/512.png')
+            windowOptions.icon = path.join(__dirname, '/sink/app-icon/png/512.png')
         }
 
         mainWindow = new BrowserWindow(windowOptions)

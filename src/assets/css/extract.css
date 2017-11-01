@@ -1,0 +1,188 @@
+#extract-section .subsection-wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+#extract-section .subsection-wrapper > div {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding-top: 5rem;
+}
+
+#extract-section .subsection {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin: 0 !important;
+    padding-top: 2rem;
+    padding-bottom: 100px;
+}
+
+#extract-section .buttonbar {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index:1050;
+    padding: 2rem;
+    text-align: right;
+}
+
+#extract-section .buttonbar button {
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: 5px 30px;
+    background-color: var(--color-accent);
+    border: none;
+    display: inline-block;
+}
+
+#extract-section .buttonbar button:hover {
+    cursor: pointer;
+    background-color: #ff9499;
+}
+
+#extract-search {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index:1000;
+}
+
+#extract-search-input {
+    width: 100%;
+    background-color: #000000;
+    color: var(--color);
+    border: solid 1px #111111;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: 5px 10px;
+    outline: none;
+}
+
+#extract-search-input:hover {
+    border: solid 1px var(--color-strong);
+}
+
+#extract-search-input:focus {
+    border: solid 1px var(--color-subtle);
+}
+
+#extract-results {
+    width: 100%;
+    position: absolute;
+    top: calc(2rem + 10px);
+    z-index:1001;
+}
+
+#extract-results span {
+    color: var(--color);
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: 5px 10px;
+    border-left: solid 1px var(--color-strong);
+    border-right: solid 1px var(--color-strong);
+}
+
+#extract-results span.more {
+    color: var(--color-subtle);
+    font-style: italic;
+}
+
+#extract-results span em {
+    color: var(--color-accent);
+    font-style: normal;
+}
+
+#extract-results span:first-of-type {
+    border-top: solid 1px var(--color-strong);
+}
+#extract-results span:last-of-type {
+    border-bottom: solid 1px var(--color-strong);
+}
+
+#extract-results span:nth-child(odd) {
+    background-color: #111;
+}
+
+#extract-results span:nth-child(even) {
+    background-color: #222;
+}
+
+#extract-results span:hover {
+    cursor: pointer;
+    background-color: #333;
+}
+
+#extract-selection {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+#extract-selection.mute {
+    opacity: 0.3;
+}
+
+#extract-selection > div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#extract-selection span {
+    color: var(--color);
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: 5px;
+    padding-left: 10px;
+    position: relative;
+}
+
+#extract-selection span.more {
+    color: var(--color-subtle);
+    font-style: italic;
+}
+
+#extract-selection span em {
+    color: var(--color-accent);
+    font-style: normal;
+}
+
+#extract-selection span:nth-child(odd) {
+    background-color: #111;
+}
+
+#extract-selection span:nth-child(even) {
+    background-color: #222;
+}
+
+#extract-selection span:hover {
+    background-color: #333;
+}
+
+#extract-selection .delete {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: calc(2rem + 10px);
+    height: calc(2rem + 10px);
+    padding: 8px;
+    background-color: transparent !important;
+}
+
+#extract-selection .delete svg {
+    height: 100%;
+    width: 100%;
+}
+
+#extract-selection .delete:hover {
+    cursor: pointer;
+    background-color: var(--color-accent) !important;
+}
