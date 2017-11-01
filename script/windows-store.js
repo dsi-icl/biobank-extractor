@@ -16,7 +16,7 @@ const args = [
     '--package-display-name',
     metadata.productName,
     '--assets',
-    path.join(__dirname, '..', 'assets', 'tiles'),
+    path.join(__dirname, '..', 'sink', 'tiles'),
     '--package-description',
     metadata.description
 ]

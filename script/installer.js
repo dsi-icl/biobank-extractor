@@ -20,13 +20,13 @@ function getInstallerConfig() {
     return Promise.resolve({
         appDirectory: path.join(outPath, 'biobank-extractor-win32-ia32'),
         exe: 'biobank-extractor.exe',
-        iconUrl: 'https://raw.githubusercontent.com/dsi-icl/biobank-extractor/master/assets/app-icon/win/app.ico',
-        loadingGif: path.join(rootPath, 'assets', 'img', 'loading.gif'),
+        iconUrl: 'https://raw.githubusercontent.com/dsi-icl/biobank-extractor/master/sink/app-icon/win/app.ico',
+        loadingGif: path.join(rootPath, 'sink', 'img', 'loading.gif'),
         noMsi: true,
         outputDirectory: path.join(outPath, 'windows-installer'),
         name: 'UKBiobankExtractor',
         setupExe: 'UKBiobankExtractorSetup.exe',
-        setupIcon: path.join(rootPath, 'assets', 'app-icon', 'win', 'app.ico'),
+        setupIcon: path.join(rootPath, 'sink', 'app-icon', 'win', 'app.ico'),
         skipUpdateIcon: true
     })
 }
