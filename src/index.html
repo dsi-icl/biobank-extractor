@@ -51,40 +51,17 @@
                 <em>extraction</em>
             </button>
         </div>
-        <!--
-            <footer class="nav-footer">
-            <a class="nav-footer-logo" href="https://github.com/fguitton" aria-label="Homepage">
-                <svg class="nav-footer-icon">
-                    <use xlink:href="assets/img/icons.svg#icon-love"></use>
-                </svg>
-                Florian G.
-            </a>
-            </footer>
-        -->
+
     </nav>
     <main class="content js-content"></main>
     <script>
+
         require('./assets/imports')
         require('./assets/drop-zone')
         require('./assets/field-search')
         require('./assets/ex-links')
         require('./assets/nav')
         require('./assets/subsection-buttons')
-
-        const event = new CustomEvent('drop', { bubbles: true, cancelable: true });
-        event.dataTransfer = {
-            files: [{
-                path: require('path').join(__dirname, '../sink/tuples/set.csv')
-            }]
-        }
-        document.body.dispatchEvent(event);
-
-        setTimeout(function () {
-            const event = new CustomEvent('input', { bubbles: true, cancelable: true });
-            document.querySelector('button[data-section="extract"]').click();
-            document.querySelector('#extract-search-input').value = "sex";
-            document.querySelector('#extract-search-input').dispatchEvent(event);
-        }, 1000)
 
     </script>
 </body>

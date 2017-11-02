@@ -96,6 +96,9 @@
     margin: 0 0 1em 0;
     font-size: 1.5em;
     color: hsl(0, 0%, 100%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .drop-stats p {

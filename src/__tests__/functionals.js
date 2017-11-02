@@ -159,9 +159,10 @@ describe('biobank-extractor', function () {
 
     describe('when dropping a file in the window', function () {
         it('it computes and shows the file stats', function () {
-            let finalNumber = ["15", "10", "5", "3"];
+            let finalNumber = ["15", "11", "5", "3"];
             return app.client.dropFile()
                 .getText('.drop-stats-number').then(function (v) {
+                    v.pop()
                     v.pop()
                     return v;
                 }).should.eventually.deep.equal(finalNumber)

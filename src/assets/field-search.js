@@ -3,6 +3,8 @@ const ipc = require('electron').ipcRenderer
 const input = document.querySelector('#extract-search-input')
 const dest = document.querySelector('#extract-results')
 const list = document.querySelector('#extract-selection')
+const validate = document.querySelector('#extract-validate')
+let selection = {}
 
 const inputAction = function (ev) {
     ev.preventDefault()
@@ -15,10 +17,40 @@ const inputAction = function (ev) {
 
 input.addEventListener('input', inputAction);
 input.addEventListener('focus', inputAction);
-document.body.addEventListener('click', function (event) {
-    if (event.target !== input) {
+document.body.addEventListener('click', function (ev) {
+    ev.preventDefault()
+    if (ev.target !== input) {
         dest.innerHTML = ''
         list.classList.remove('mute')
+    }
+})
+
+ipc.on('files-extract-error', function (event, arg) {
+    console.error(arg);
+})
+
+ipc.on('files-scan-progress', function (event, arg) {
+    if (arg.progress === undefined) {
+        selection = {}
+        input.value = ''
+        dest.innerHTML = ''
+        list.innerHTML = ''
+        list.classList.remove('mute')
+    }
+})
+
+ipc.on('files-extract-progress', function (event, arg) {
+    if (arg.progress === undefined) {
+        document.getElementById('drop-placeholder').classList.add('hidden');
+        document.getElementById('drop-start-description').innerHTML = 'We are working to extract the fields that you have selected to a new file. We are placing it in the same folder as your original for convenience!';
+        return;
+    }
+
+    document.getElementById('drop-file-scan-progress').innerHTML = `${arg.progress}`;
+    document.getElementById('drop-fun-message').innerHTML = `Needing ~${arg.estimatedDuration} extracting ${arg.fields} fields. Output is ${arg.filesize[0]} ${arg.filesize[1]}`;
+
+    if (arg.fields === undefined) {
+        document.querySelector('#drop-modal').classList.remove('is-shown');
     }
 })
 
@@ -68,7 +100,6 @@ ipc.on('extract-field-result', function (event, arg) {
     }
 })
 
-const selection = {}
 const addResultSelection = function () {
     selection[this.getAttribute('data-id')] = this.getAttribute('data-name')
     drawResultSelection()
@@ -91,3 +122,9 @@ const drawResultSelection = function () {
         list.appendChild(item);
     }
 }
+
+validate.addEventListener('click', function (ev) {
+    document.querySelector('#drop-modal').classList.add('is-shown');
+    ipc.send('extract-validate', selection);
+    ev.preventDefault()
+})

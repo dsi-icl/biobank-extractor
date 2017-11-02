@@ -39,7 +39,6 @@
 }
 
 #extract-section .buttonbar button:hover {
-    cursor: pointer;
     background-color: #ff9499;
 }
 
@@ -113,7 +112,6 @@
 }
 
 #extract-results span:hover {
-    cursor: pointer;
     background-color: #333;
 }
 
@@ -183,6 +181,5 @@
 }
 
 #extract-selection .delete:hover {
-    cursor: pointer;
     background-color: var(--color-accent) !important;
 }
